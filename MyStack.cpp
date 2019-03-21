@@ -54,7 +54,7 @@ void pop_stack(pMyStack head)
 {
 	pMyStack p = head->pNext;
 	pMyStack temp = p->pNext;
-	free(p);
+	delete p;
 	p = temp;
 	head->pNext = p;
 }
@@ -79,10 +79,10 @@ void destory_stack(pMyStack head)
 	while (NULL != p)
 	{
 		q = p->pNext;
-		free(p);
+		delete p;
 		p = q;
 	}
-	free(head);
+	delete head;
 	head->pNext = NULL;
 }
 bool isEmpty(pMyStack head)
