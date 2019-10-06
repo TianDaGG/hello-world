@@ -81,7 +81,8 @@ int main()
 	//设置起点和终点   
 	MyPoint beginPos = { 1, 1 };
 	MyPoint endPos = { 9, 1 };//1,23   
-	CMyStack<MyPoint> myStack;    \t	nmyStack.PushStack(beginPos);
+	CMyStack<MyPoint> myStack;    
+	myStack.PushStack(beginPos);
 	//当前节点   
 	MyPoint currentPos;
 	MyPoint searchPos = beginPos;
@@ -90,8 +91,7 @@ int main()
 		//找到终点   
 		if (searchPos.row == endPos.row &&searchPos.col == endPos.col)
 		{
-			std::cout << "找到终点啦!
-				";   
+			std::cout << "找到终点啦!";   
 				break;
 		}
 		currentPos = searchPos;
@@ -103,7 +103,8 @@ int main()
 			if (pathMap[currentPos.row][currentPos.col].val == 0 &&
 				pathMap[currentPos.row][currentPos.col].isFind == false)
 			{
-				\t	npathMap[currentPos.row][currentPos.col].isFind = true;    \t	nmyStack.PushStack(currentPos);
+				pathMap[currentPos.row][currentPos.col].isFind = true;    
+				myStack.PushStack(currentPos);
 				searchPos = currentPos;
 			}
 			break;
@@ -148,8 +149,7 @@ int main()
 		//没找到出口   
 		if (myStack.IsEmptyStack())
 		{
-			std::cout << "这个迷宫没有出口!
-				";//栈空->回到原点   
+			std::cout << "这个迷宫没有出口!";//栈空->回到原点   
 				break;
 		}
 		drawMap(map, searchPos);//每循环一次刷新一次     
