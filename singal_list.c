@@ -29,6 +29,7 @@ void FindNode(pNode head, int data);
 void ModifyNode(pNode head, int oldData, int newData);
 void DeleteNode(pNode head, int delData);
 void SortNode(pNode head);
+void FreeNode(pNode head);
 void PrintNode(pNode head);
 int main(int argc, char *argv[])
 {
@@ -67,7 +68,7 @@ int main(int argc, char *argv[])
 	SortNode(head);
 	PrintNode(head);
 	//释放所有内存
-
+	FreeNode(head);
 	return 0;
 }
 pNode InitNode()
@@ -171,29 +172,42 @@ void DeleteNode(pNode head, int delData)
 void SortNode(pNode head)
 {
 	pNode p = head;
-	int arr[64], log = 0;
-	memset(arr, '\0', sizeof(arr));
+	int position = 0;
 	while (p->pNext)
 	{
-		arr[log++] = p->data;
+		++position;
 		p = p->pNext;
 	}
-	arr[++log] = p->data;
-	++log;
-	for (int i = 0; i<log - 1; ++i)
+	++position;
+	p = head;
+	
+	for (int i = 0; i<position - 1; ++i)
 	{
-		for (int j = i + 1; j<log; ++j)
+		pNode tmp = p->pNext;
+		for (int j = i + 1; j<position; ++j)
 		{
-			if (arr[i]>arr[j])
+			if (p->data>tmp->data)
 			{
-				int temp = arr[i];
-				arr[i] = arr[j];
-				arr[j] = temp;
+				pNode q = new Node;
+				q->data = p->data;
+				p->data = tmp->data;
+				tmp->data = q->data;
 			}
+			tmp = tmp->pNext;
 		}
+		p = p->pNext;
 	}
-	for (int i = 0; i<log; ++i)
-		cout << arr[i] << ' ';
+}
+
+void FreeNode(pNode head)
+{
+	pNode p=head;
+	while(p)
+	{
+		pNode temp=p->pNext;
+		delete p;
+		p=temp;
+	}
 }
 void PrintNode(pNode head)
 {
@@ -203,5 +217,5 @@ void PrintNode(pNode head)
 		cout << p->data << "->";
 		p = p->pNext;
 	}
-	cout << p->data << endl;;
-
+	cout << p->data << endl;
+}
