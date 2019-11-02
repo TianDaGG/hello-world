@@ -5,7 +5,7 @@
 *   Author      : mabu
 *   QQ          : 1105403369
 *   Created date: 2019-11-2 15:50:04
-*   Description : 线程的简单创建、join和detach的别
+*   Description : 线程的简单创建、join和detach的区别
 *
 *===============================================================*/
 
