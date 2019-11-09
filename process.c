@@ -40,9 +40,13 @@ int main(int argc,char* argv[])
 			exit(1);
 			break;
 		case 0://child
+			printf("child pid is %d\n",getpid());  //get child id
+			printf("child ppid is %d\n",getppid());//get father id
 			ReadString(pipes);
 			break;
 		default://father
+			printf("father pid is %d\n",getpid());
+			printf("father ppid is %d\n",getppid());
 			WriteString(pipes);
 			break;
 	}
@@ -62,6 +66,7 @@ void WriteString(int pipes[])
 		exit(1);
 	}
 	close(pipes[1]);
+	exit(0);
 }
 void ReadString(int pipes[])
 {
@@ -75,4 +80,5 @@ void ReadString(int pipes[])
 	}
 	printf("%s\n",readBuf);
 	close(pipes[0]);
+	exit(0);
 }
